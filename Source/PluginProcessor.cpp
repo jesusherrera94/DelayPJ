@@ -136,7 +136,12 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     auto totalNumOutputChannels = getTotalNumOutputChannels();
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-    buffer.applyGain(0.5f);
+    for (int channel = 0; channel< totalNumInputChannels; ++channel) {
+        auto* channelData = buffer.getWritePointer(channel);
+        for (int sample = 0; sample< buffer.getNumSamples(); ++sample) {
+            channelData[sample] *=  0.5f;
+        }
+    }
 }
 
 //==============================================================================
