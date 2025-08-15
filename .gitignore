@@ -1,4 +1,6 @@
 **/.DS_Store
-**/Builds
+**/build
 **/JuceLibraryCode
 **/*.filtergraph
+**/*.wav
+
