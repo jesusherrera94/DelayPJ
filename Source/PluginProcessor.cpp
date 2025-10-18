@@ -10,18 +10,15 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-DelayPJAudioProcessor::DelayPJAudioProcessor()
-#ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
-#endif
+DelayPJAudioProcessor::DelayPJAudioProcessor() :
+    juce::AudioProcessor(
+                         BusesProperties()
+                         .withInput("Input", juce::AudioChannelSet::stereo(), true)
+                         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+                         )
 {
+    auto* param = apvts.getParameter(gainParamID.getParamID());
+    gainParam = dynamic_cast<juce::AudioParameterFloat*>(param);
 }
 
 DelayPJAudioProcessor::~DelayPJAudioProcessor()
@@ -115,7 +112,7 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     auto totalNumOutputChannels = getTotalNumOutputChannels();
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-    float gainInDecibels = apvts.getRawParameterValue("gain")->load();
+    float gainInDecibels = gainParam->get();
     float gain = juce::Decibels::decibelsToGain(gainInDecibels);
     for (int channel = 0; channel< totalNumInputChannels; ++channel) {
         auto* channelData = buffer.getWritePointer(channel);
@@ -163,7 +160,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout DelayPJAudioProcessor::creat
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     layout.add(
                std::make_unique<juce::AudioParameterFloat>(
-                                                           juce::ParameterID{"gain", 1},
+                                                           gainParamID,
                                                            "Output Gain",
                                                            juce::NormalisableRange<float>{ -12.0f, 12.0f},
                                                            0.0f
