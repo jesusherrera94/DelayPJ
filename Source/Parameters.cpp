@@ -34,5 +34,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout Parameters::createParameterL
 }
 
 void Parameters::update() noexcept {
-    gain = juce::Decibels::decibelsToGain((gainParam->get()));
+    gainSmoother.setTargetValue(juce::Decibels::decibelsToGain(gainParam->get()));
+}
+
+void Parameters::prepareToPlay(double sampleRate) noexcept {
+    double duration = 0.2f;
+    gainSmoother.reset(sampleRate, duration);
+}
+
+void Parameters::reset() noexcept {
+    gain = 0.0f;
+    gainSmoother.setCurrentAndTargetValue(juce::Decibels::decibelsToGain(gainParam->get()));
+}
+
+void Parameters::smoothen() noexcept {
+    gain = gainSmoother.getNextValue();
 }
