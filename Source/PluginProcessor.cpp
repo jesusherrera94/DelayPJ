@@ -122,13 +122,23 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     params.update();
+    delayLine.setDelay(48000.0f);
     
     float* channelDataL = buffer.getWritePointer(0);
     float* channelDataR = buffer.getWritePointer(1);
     for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
         params.smoothen();
-        channelDataL[sample] *= params.gain;
-        channelDataR[sample] *= params.gain;
+        float dryL = channelDataL[sample];
+        float dryR = channelDataR[sample];
+        
+        delayLine.pushSample(0, dryL);
+        delayLine.pushSample(1, dryR);
+        
+        float wetL = delayLine.popSample(0);
+        float wetR = delayLine.popSample(1);
+        
+        channelDataL[sample] = (dryL + wetL) * params.gain;
+        channelDataR[sample] = (dryR + wetR) * params.gain;
     }
     
 }
