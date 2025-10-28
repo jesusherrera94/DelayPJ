@@ -138,9 +138,12 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         
         float wetL = delayLine.popSample(0);
         float wetR = delayLine.popSample(1);
+        // applying linera interpolation: a*(1-c) + b*c, where c[0-1.0]
+        float mixL = dryL * (1.0f - params.mix) + wetL * params.mix;
+        float mixR = dryR * (1.0f - params.mix) + wetR * params.mix;
         
-        channelDataL[sample] = (dryL + wetL) * params.gain;
-        channelDataR[sample] = (dryR + wetR) * params.gain;
+        channelDataL[sample] = mixL * params.gain;
+        channelDataR[sample] = mixR * params.gain;
     }
     
 }
