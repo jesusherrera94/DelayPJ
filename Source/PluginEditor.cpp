@@ -15,6 +15,10 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
+    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 16);
+    slider.setBounds(0, 0, 70, 86);
+    addAndMakeVisible(slider);
     setSize (500, 330);
 }
 
@@ -31,6 +35,5 @@ void DelayPJAudioProcessorEditor::paint (juce::Graphics& g)
 
 void DelayPJAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    slider.setTopLeftPosition(215, 120);
 }
