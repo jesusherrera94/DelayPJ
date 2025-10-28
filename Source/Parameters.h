@@ -36,4 +36,6 @@ class Parameters{
         float coeff = 0.0f; // one-pole smoothing(filter)
         juce::AudioParameterFloat* mixParam;
         juce::LinearSmoothedValue<float> mixSmoother;
+    
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Parameters)
 };
