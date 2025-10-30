@@ -697,10 +697,13 @@
     <ClCompile Include="..\..\Source\Parameters.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\PluginEditor.cpp">
+      <Filter>DelayPJ\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\PluginEditor.cpp">
+    <ClCompile Include="..\..\Source\RotaryKnob.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
     <ClCompile Include="C:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
@@ -3675,10 +3678,13 @@
     <ClInclude Include="..\..\Source\Parameters.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\PluginEditor.h">
+      <Filter>DelayPJ\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\PluginEditor.h">
+    <ClInclude Include="..\..\Source\RotaryKnob.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
     <ClInclude Include="C:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
