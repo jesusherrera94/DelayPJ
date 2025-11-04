@@ -694,6 +694,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\LookAndFeel.cpp">
+      <Filter>DelayPJ\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Parameters.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
@@ -3675,6 +3678,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\LookAndFeel.h">
+      <Filter>DelayPJ\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Parameters.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>

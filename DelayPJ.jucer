@@ -5,6 +5,8 @@
               pluginManufacturerCode="PDDJ" pluginCode="Dlay" cppLanguageStandard="20">
   <MAINGROUP id="l9Q8Za" name="DelayPJ">
     <GROUP id="{9EB89606-288A-07FA-4229-76D5DB06AB6F}" name="Source">
+      <FILE id="hrR6aP" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
+      <FILE id="vu1pjV" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
       <FILE id="mU1CE3" name="Parameters.cpp" compile="1" resource="0" file="Source/Parameters.cpp"/>
       <FILE id="vHNstg" name="Parameters.h" compile="0" resource="0" file="Source/Parameters.h"/>
       <FILE id="vrQKvZ" name="PluginEditor.cpp" compile="1" resource="0"

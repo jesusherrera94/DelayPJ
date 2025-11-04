@@ -29,6 +29,7 @@
 		080EBE1CCD54A390B2D3569E /* include_juce_audio_processors.mm */ = {isa = PBXBuildFile; fileRef = 512A4C536DD6425B05B9CFA4; };
 		0909CE3D3D74644F1D2557F6 /* Shared Code */ = {isa = PBXBuildFile; fileRef = 14260D25B07D73F6842BA2EE; };
 		146365B88CFD5EBA241CE4FF /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = D983D6C1829756DE6338F9E2; };
+		1A5105650ADAEE68D770603E /* LookAndFeel.cpp */ = {isa = PBXBuildFile; fileRef = 9C4CCBBC5CD85801DDF52AAA; };
 		267C3F5AFCC5E224543C838E /* MetalKit.framework */ = {isa = PBXBuildFile; fileRef = C58482E25A453419440D502D; settings = { ATTRIBUTES = (Weak, ); }; };
 		2EC578382892C5589288A20C /* IOKit.framework */ = {isa = PBXBuildFile; fileRef = 24A4C4B16D0D29AE4CFB1403; };
 		33176F56055C569E62988011 /* include_juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = 02BF271FA383D140D5AD0EA3; };
@@ -123,6 +124,7 @@
 		9126EADE00C1C36FD237B4D3 /* PluginEditor.cpp */ /* PluginEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginEditor.cpp; path = ../../Source/PluginEditor.cpp; sourceTree = SOURCE_ROOT; };
 		968FEDD037EC0C65950B9774 /* include_juce_audio_utils.mm */ /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		9C429AAEC73446D57C3742E5 /* VST3 Manifest Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = juce_vst3_helper; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C4CCBBC5CD85801DDF52AAA /* LookAndFeel.cpp */ /* LookAndFeel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LookAndFeel.cpp; path = ../../Source/LookAndFeel.cpp; sourceTree = SOURCE_ROOT; };
 		9F692B0950D42EE8CD480135 /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
 		A1FC906E3511B28CDB15E9FD /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		A29D0CC91E01BEC795AB6751 /* Security.framework */ /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,7 @@
 		C74559602A654CF0CFB3650A /* juce_events */ /* juce_events */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_events; path = /Users/jesusherrera/development/JUCE/modules/juce_events; sourceTree = "<absolute>"; };
 		C7DD44E116C5583B73CF5AEC /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
 		C9E7136EB16B638823363E7E /* Metal.framework */ /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		C9FB2DE6BDA4EF9D12165A6D /* LookAndFeel.h */ /* LookAndFeel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LookAndFeel.h; path = ../../Source/LookAndFeel.h; sourceTree = SOURCE_ROOT; };
 		CE33C1125FAA2115022CF092 /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
 		D028E5833BEAA64E62C0965C /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = /Users/jesusherrera/development/JUCE/modules/juce_dsp; sourceTree = "<absolute>"; };
 		D983D6C1829756DE6338F9E2 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -315,6 +318,8 @@
 		7564A9777A0826A89A1F3BAC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9C4CCBBC5CD85801DDF52AAA,
+				C9FB2DE6BDA4EF9D12165A6D,
 				900399371F12C2C3935BFD3E,
 				29719CF8E45DDFB907F1DAA7,
 				9126EADE00C1C36FD237B4D3,
@@ -704,6 +709,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5105650ADAEE68D770603E,
 				4BE77F9056DF93B6AB711A0A,
 				C857A307B9E99A04C95081B5,
 				D711DF7834677034D8095C0D,
