@@ -31,7 +31,7 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     DelayPJAudioProcessor& audioProcessor;
-    RotaryKnob gainKnob{ "Gain", audioProcessor.apvts, gainParamID };
+    RotaryKnob gainKnob{ "Gain", audioProcessor.apvts, gainParamID, true };
     RotaryKnob mixKnob{ "Mix", audioProcessor.apvts, mixParamID };
     RotaryKnob delayTimeKnob{ "Time", audioProcessor.apvts, delayTimeParamID };
     juce::GroupComponent delayGroup, feedbackGroup, outputGroup;
