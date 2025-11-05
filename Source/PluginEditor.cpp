@@ -29,7 +29,7 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     outputGroup.addAndMakeVisible(gainKnob);
     outputGroup.addAndMakeVisible(mixKnob);
     addAndMakeVisible(outputGroup);
-    
+    setLookAndFeel(new MainLookAndFeel);
     setSize (500, 330);
 }
 

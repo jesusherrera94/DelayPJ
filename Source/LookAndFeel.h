@@ -54,3 +54,11 @@ class Fonts {
         static const juce::Typeface::Ptr typeface;
     Fonts() = delete;
 };
+
+class MainLookAndFeel: public juce::LookAndFeel_V4 {
+    public:
+    MainLookAndFeel();
+    juce::Font getLabelFont(juce::Label&) override;
+    private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainLookAndFeel)
+};

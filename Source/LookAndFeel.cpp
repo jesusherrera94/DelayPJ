@@ -74,3 +74,12 @@ void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
 juce::Font RotaryKnobLookAndFeel::getLabelFont([[maybe_unused]]juce::Label& label) {
     return Fonts::getFont();
 }
+
+MainLookAndFeel::MainLookAndFeel() {
+    setColour(juce::GroupComponent::textColourId, Colors::Group::label);
+    setColour(juce::GroupComponent::outlineColourId, Colors::Group::outline);
+}
+
+juce::Font MainLookAndFeel::getLabelFont([[maybe_unused]]juce::Label& label) {
+    return Fonts::getFont();
+}
