@@ -21,7 +21,13 @@ void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
     auto path = juce::Path();
     path.addEllipse(knobRect);
     dropShadow.drawForPath(g, path);
-    
     g.setColour(Colors::knob::outline);
     g.fillEllipse(knobRect);
+    
+    auto innerRect = knobRect.reduced(2.0f, 2.0f);
+    auto gradient = juce::ColourGradient(
+                                         Colors::knob::gradientTop, 0.0f, innerRect.getY(), Colors::knob::gradientBottom, 0.0f, innerRect.getBottom(), false
+                                         );
+    g.setGradientFill(gradient);
+    g.fillEllipse(innerRect);
 }
