@@ -50,4 +50,5 @@ void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
     dialPath.lineTo(dialEnd);
     g.setColour(Colors::knob::dial);
     g.strokePath(dialPath, strokeType);
+    
 }
