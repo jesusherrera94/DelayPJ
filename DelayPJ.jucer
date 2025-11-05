@@ -4,6 +4,9 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Parallels Development"
               pluginManufacturerCode="PDDJ" pluginCode="Dlay" cppLanguageStandard="20">
   <MAINGROUP id="l9Q8Za" name="DelayPJ">
+    <GROUP id="{924860E2-451A-AC67-F984-438F8549A3A4}" name="Assets">
+      <FILE id="bseTyW" name="Lato-Medium.ttf" compile="0" resource="1" file="Assets/Lato-Medium.ttf"/>
+    </GROUP>
     <GROUP id="{9EB89606-288A-07FA-4229-76D5DB06AB6F}" name="Source">
       <FILE id="hrR6aP" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
       <FILE id="vu1pjV" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>

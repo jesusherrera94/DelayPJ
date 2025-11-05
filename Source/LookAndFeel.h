@@ -27,6 +27,10 @@ namespace Colors {
         const juce::Colour value { 240, 240, 240 };
         const juce::Colour caret { 255, 255, 255 };
     }
+    namespace Group {
+        const juce::Colour label { 160, 155, 150 };
+        const juce::Colour outline { 235, 230, 225 };
+    }
 }
 
 class RotaryKnobLookAndFeel : public juce::LookAndFeel_V4 {
@@ -37,7 +41,16 @@ class RotaryKnobLookAndFeel : public juce::LookAndFeel_V4 {
         return &instance;
     }
     void drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider) override;
+    juce::Font getLabelFont(juce::Label&) override;
     private:
     juce::DropShadow dropShadow { Colors::knob::dropShadow, 6, { 0, 3 } };
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (RotaryKnobLookAndFeel)
+};
+
+class Fonts {
+    public:
+        static juce::Font getFont(float height = 16.0f);
+    private:
+        static const juce::Typeface::Ptr typeface;
+    Fonts() = delete;
 };
