@@ -18,6 +18,10 @@ RotaryKnobLookAndFeel::RotaryKnobLookAndFeel() {
 void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, [[maybe_unused]] int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider &slider) {
     auto bounds = juce::Rectangle<int>(x,y,width,width).toFloat();
     auto knobRect = bounds.reduced(10.0f, 10.0f);
+    auto path = juce::Path();
+    path.addEllipse(knobRect);
+    dropShadow.drawForPath(g, path);
+    
     g.setColour(Colors::knob::outline);
     g.fillEllipse(knobRect);
 }
