@@ -29,12 +29,13 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     outputGroup.addAndMakeVisible(gainKnob);
     outputGroup.addAndMakeVisible(mixKnob);
     addAndMakeVisible(outputGroup);
-    setLookAndFeel(new MainLookAndFeel);
+    setLookAndFeel(&mainLF);
     setSize (500, 330);
 }
 
 DelayPJAudioProcessorEditor::~DelayPJAudioProcessorEditor()
 {
+    setLookAndFeel(nullptr);
 }
 
 //==============================================================================
