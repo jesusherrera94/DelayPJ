@@ -138,6 +138,7 @@
 		D028E5833BEAA64E62C0965C /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = /Users/jesusherrera/development/JUCE/modules/juce_dsp; sourceTree = "<absolute>"; };
 		D983D6C1829756DE6338F9E2 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		DBDCBBC51D35FEA556364117 /* Images.xcassets */ /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DelayPJ/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		E709F640F9783C2ABB530BC5 /* Logo.png */ /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = ../../Assets/Logo.png; sourceTree = SOURCE_ROOT; };
 		EC36AA723399E9653B3BE81E /* UniformTypeIdentifiers.framework */ /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		F4CCB7115529D41ECBE839AC /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F5E7D94392D9BE00184FD0C0 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -196,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				A7B709614DA1D8CA555B7A47,
+				E709F640F9783C2ABB530BC5,
 			);
 			name = Assets;
 			sourceTree = "<group>";
