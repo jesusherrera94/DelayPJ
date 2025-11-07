@@ -21,6 +21,8 @@ RotaryKnobLookAndFeel::RotaryKnobLookAndFeel() {
     setColour(juce::Label::textColourId, Colors::knob::label);
     setColour(juce::Slider::textBoxTextColourId, Colors::knob::label);
     setColour(juce::Slider::rotarySliderFillColourId, Colors::knob::trackActive);
+    setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
+    setColour(juce::CaretComponent::caretColourId, Colors::knob::caret);
 }
 
 void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, [[maybe_unused]] int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider &slider) {
@@ -73,6 +75,46 @@ void RotaryKnobLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, in
 
 juce::Font RotaryKnobLookAndFeel::getLabelFont([[maybe_unused]]juce::Label& label) {
     return Fonts::getFont();
+}
+
+class RotaryKnobLabel : public juce::Label {
+    public:
+        RotaryKnobLabel() : juce::Label() {}
+    void mouseWheelMove(const juce::MouseEvent&, const juce::MouseWheelDetails&) override {}
+    std::unique_ptr<juce::AccessibilityHandler> createAccessibilityHandler() override {
+        return createIgnoredAccessibilityHandler(*this);
+    }
+    juce::TextEditor* createEditorComponent() override {
+        auto* ed = new juce::TextEditor(getName());
+        ed->applyFontToAllText(getLookAndFeel().getLabelFont(*this));
+        copyAllExplicitColoursTo(*ed);
+        ed->setBorder(juce::BorderSize<int>());
+        ed->setIndents(2, 1);
+        ed->setJustification(juce::Justification::centredTop);
+        ed->setPopupMenuEnabled(false);
+        ed->setInputRestrictions(8);
+        return ed;
+    }
+};
+
+void RotaryKnobLookAndFeel::fillTextEditorBackground(juce::Graphics& g, [[maybe_unused]] int width, [[maybe_unused]] int height, juce::TextEditor& textEditor) {
+    g.setColour(Colors::knob::textBoxBackgroound);
+    g.fillRoundedRectangle(textEditor.getLocalBounds().reduced(4, 0).toFloat(), 4.0f);
+}
+
+juce::Label* RotaryKnobLookAndFeel::createSliderTextBox(juce::Slider& slider) {
+    auto l = new RotaryKnobLabel();
+    l->setJustificationType(juce::Justification::centred);
+        l->setKeyboardType(juce::TextInputTarget::decimalKeyboard);
+        l->setColour(juce::Label::textColourId,
+                     slider.findColour(juce::Slider::textBoxTextColourId));
+        l->setColour(juce::TextEditor::textColourId, Colors::knob::value);
+        l->setColour(juce::TextEditor::highlightedTextColourId, Colors::knob::value);
+        l->setColour(juce::TextEditor::highlightColourId,
+                     slider.findColour(juce::Slider::rotarySliderFillColourId));
+        l->setColour(juce::TextEditor::backgroundColourId,
+                     Colors::knob::textBoxBackgroound);
+        return l;
 }
 
 MainLookAndFeel::MainLookAndFeel() {
