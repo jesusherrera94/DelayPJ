@@ -41,8 +41,12 @@ DelayPJAudioProcessorEditor::~DelayPJAudioProcessorEditor()
 //==============================================================================
 void DelayPJAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (Colors::background);
+    // background image
+    auto noise = juce::ImageCache::getFromMemory(BinaryData::Noise_png, BinaryData::Noise_pngSize);
+    auto fillType = juce::FillType(noise, juce::AffineTransform::scale(0.5f));
+    g.setFillType(fillType);
+    g.fillRect(getLocalBounds());
+    // logo
     auto rect = getLocalBounds().withHeight(40);
     g.setColour(Colors::header);
     g.fillRect(rect);

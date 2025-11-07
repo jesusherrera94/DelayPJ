@@ -7757,6 +7757,9 @@
     <None Include="..\..\Assets\Logo.png">
       <Filter>DelayPJ\Assets</Filter>
     </None>
+    <None Include="..\..\Assets\Noise.png">
+      <Filter>DelayPJ\Assets</Filter>
+    </None>
     <None Include="C:\JUCE\modules\juce_audio_devices\native\oboe\src\common\README.md">
       <Filter>JUCE Modules\juce_audio_devices\native\oboe\src\common</Filter>
     </None>
