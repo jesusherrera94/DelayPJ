@@ -110,6 +110,7 @@
 		796CDA1BFA30B63575C3EDE8 /* Info-Standalone_Plugin.plist */ /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
 		7A559C286B8773269CF95856 /* juce_core */ /* juce_core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_core; path = /Users/jesusherrera/development/JUCE/modules/juce_core; sourceTree = "<absolute>"; };
 		7A8FCAB3C4BFA36947B9A077 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = /Users/jesusherrera/development/JUCE/modules/juce_audio_devices; sourceTree = "<absolute>"; };
+		7CF6187F86079010ED6D4CE4 /* ProtectYourEars.h */ /* ProtectYourEars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ProtectYourEars.h; path = ../../Source/ProtectYourEars.h; sourceTree = SOURCE_ROOT; };
 		82D151D1D62DAEB5FC54290C /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DelayPJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8992B532EDDED3A8883B37F5 /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = /Users/jesusherrera/development/JUCE/modules/juce_audio_formats; sourceTree = "<absolute>"; };
 		8B11A0913C55A61D63F485EC /* include_juce_graphics_Sheenbidi.c */ /* include_juce_graphics_Sheenbidi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = include_juce_graphics_Sheenbidi.c; path = ../../JuceLibraryCode/include_juce_graphics_Sheenbidi.c; sourceTree = SOURCE_ROOT; };
@@ -269,6 +270,7 @@
 				65C1F9800F3C7D204B31D642,
 				A1FC906E3511B28CDB15E9FD,
 				27008C41033FD0E56A7A8FDA,
+				7CF6187F86079010ED6D4CE4,
 				30D36960E33771E1559EA638,
 				3FAC26D4569A4F4A4EBA89A9,
 			);
