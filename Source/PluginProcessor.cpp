@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "ProtectYourEars.h"
 
 //==============================================================================
 DelayPJAudioProcessor::DelayPJAudioProcessor() :
@@ -145,7 +146,10 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         channelDataL[sample] = mixL * params.gain;
         channelDataR[sample] = mixR * params.gain;
     }
-    
+    // adding protect your ears utility to protect ears and speakers
+    #if JUCE_DEBUG
+        protectYourEars(buffer);
+    #endif
 }
 
 //==============================================================================
