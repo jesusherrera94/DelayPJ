@@ -102,6 +102,8 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     int maxDelayInSamples = int(std::ceil(numSamples));
     delayLine.setMaximumDelayInSamples(maxDelayInSamples);
     delayLine.reset();
+    feedbackL = 0.0f;
+    feedbackR = 0.0f;
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -134,14 +136,19 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         float dryL = channelDataL[sample];
         float dryR = channelDataR[sample];
         
-        delayLine.pushSample(0, dryL);
-        delayLine.pushSample(1, dryR);
+        delayLine.pushSample(0, dryL + feedbackL);
+        delayLine.pushSample(1, dryR + feedbackR);
         
         float wetL = delayLine.popSample(0);
         float wetR = delayLine.popSample(1);
+        feedbackL = wetL * params.feedback;
+        feedbackR = wetR * params.feedback;
+        
         // applying linera interpolation: a*(1-c) + b*c, where c[0-1.0]
         float mixL = dryL * (1.0f - params.mix) + wetL * params.mix;
         float mixR = dryR * (1.0f - params.mix) + wetR * params.mix;
+//        float mixL = dryL + wetL * params.mix;
+//        float mixR = dryR + wetR * params.mix;
         
         channelDataL[sample] = mixL * params.gain;
         channelDataR[sample] = mixR * params.gain;
