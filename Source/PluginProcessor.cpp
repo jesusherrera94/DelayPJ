@@ -136,8 +136,8 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         float dryL = channelDataL[sample];
         float dryR = channelDataR[sample];
         
-        delayLine.pushSample(0, dryL + feedbackL);
-        delayLine.pushSample(1, dryR + feedbackR);
+        delayLine.pushSample(0, dryL + feedbackR);
+        delayLine.pushSample(1, dryR + feedbackL);
         
         float wetL = delayLine.popSample(0);
         float wetR = delayLine.popSample(1);
