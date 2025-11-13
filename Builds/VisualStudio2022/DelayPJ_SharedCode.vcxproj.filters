@@ -3684,6 +3684,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\DSP.h">
+      <Filter>DelayPJ\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\LookAndFeel.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>

@@ -73,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		02BF271FA383D140D5AD0EA3 /* include_juce_dsp.mm */ /* include_juce_dsp.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_dsp.mm; path = ../../JuceLibraryCode/include_juce_dsp.mm; sourceTree = SOURCE_ROOT; };
+		088F8A71C05D01DF14B5C8ED /* DSP.h */ /* DSP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DSP.h; path = ../../Source/DSP.h; sourceTree = SOURCE_ROOT; };
 		0BD477586B500BFF0ABA652F /* LaunchScreen.storyboard */ /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		0C9A271CB5501A4E53D05718 /* juce_audio_processors */ /* juce_audio_processors */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_processors; path = /Users/jesusherrera/development/JUCE/modules/juce_audio_processors; sourceTree = "<absolute>"; };
 		12C41E0C26FF90E02D7A3F8D /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = /Users/jesusherrera/development/JUCE/modules/juce_gui_basics; sourceTree = "<absolute>"; };
@@ -262,6 +263,7 @@
 		7564A9777A0826A89A1F3BAC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				088F8A71C05D01DF14B5C8ED,
 				9C4CCBBC5CD85801DDF52AAA,
 				C9FB2DE6BDA4EF9D12165A6D,
 				900399371F12C2C3935BFD3E,

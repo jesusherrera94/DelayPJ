@@ -37,5 +37,6 @@ private:
     juce::GroupComponent delayGroup, feedbackGroup, outputGroup;
     MainLookAndFeel mainLF;
     RotaryKnob feedbackKnob { "Feedback", audioProcessor.apvts, feedbackParamID, true };
+    RotaryKnob stereoKnob{ "Stereo", audioProcessor.apvts, stereoParamID, true };
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayPJAudioProcessorEditor)
 };
