@@ -19,7 +19,8 @@ DelayPJAudioProcessor::DelayPJAudioProcessor() :
                          ),
     params(apvts)
 {
-    // Do nothing!
+    lowCutFilter.setType(juce::dsp::StateVariableTPTFilterType::highpass);
+    highCutFilter.setType(juce::dsp::StateVariableTPTFilterType::lowpass);
 }
 
 DelayPJAudioProcessor::~DelayPJAudioProcessor()
@@ -104,6 +105,10 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     delayLine.reset();
     feedbackL = 0.0f;
     feedbackR = 0.0f;
+    lowCutFilter.prepare(spec);
+    lowCutFilter.reset();
+    highCutFilter.prepare(spec);
+    highCutFilter.reset();
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -150,6 +155,10 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             params.smoothen();
             float delayInSamples = (params.delayTime / 1000.0f) * sampleRate;
             delayLine.setDelay(delayInSamples);
+            
+            lowCutFilter.setCutoffFrequency(params.lowCut);
+            highCutFilter.setCutoffFrequency(params.highCut);
+            
             float dryL = inputDataL[sample];
             float dryR = inputDataR[sample];
             
@@ -162,7 +171,12 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             float wetL = delayLine.popSample(0);
             float wetR = delayLine.popSample(1);
             feedbackL = wetL * params.feedback;
+            feedbackL = lowCutFilter.processSample(0, feedbackL);
+            feedbackL = highCutFilter.processSample(0, feedbackL);
+            
             feedbackR = wetR * params.feedback;
+            feedbackR = lowCutFilter.processSample(1, feedbackR);
+            feedbackR = highCutFilter.processSample(1, feedbackR);
             
             // applying linera interpolation: a*(1-c) + b*c, where c[0-1.0]
             float mixL = dryL * (1.0f - params.mix) + wetL * params.mix;
@@ -178,10 +192,16 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 params.smoothen();
                 float delayInSamples = params.delayTime / 1000.0f * sampleRate;
                 delayLine.setDelay(delayInSamples);
+                
+                lowCutFilter.setCutoffFrequency(params.lowCut);
+                highCutFilter.setCutoffFrequency(params.highCut);
+                
                 float dry = inputDataL[sample];
                 delayLine.pushSample(0, dry + feedbackL);
                 float wet = delayLine.popSample(0);
                 feedbackL = wet * params.feedback;
+                feedbackL = lowCutFilter.processSample(0, feedbackL);
+                feedbackL = highCutFilter.processSample(0, feedbackL);
                 float mix = dry + wet * params.mix;
                 outputDataL[sample] = mix * params.gain;
             }
