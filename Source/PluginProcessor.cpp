@@ -109,6 +109,8 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     lowCutFilter.reset();
     highCutFilter.prepare(spec);
     highCutFilter.reset();
+    lastLowCut = -1.0f;
+    lastHighCut = -1.0f;
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -156,8 +158,14 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             float delayInSamples = (params.delayTime / 1000.0f) * sampleRate;
             delayLine.setDelay(delayInSamples);
             
-            lowCutFilter.setCutoffFrequency(params.lowCut);
-            highCutFilter.setCutoffFrequency(params.highCut);
+            if (params.lowCut != lastLowCut) {
+                lowCutFilter.setCutoffFrequency(params.lowCut);
+                lastLowCut = params.lowCut;
+            }
+            if (params.highCut != lastHighCut) {
+                highCutFilter.setCutoffFrequency(params.highCut);
+                lastHighCut = params.highCut;
+            }
             
             float dryL = inputDataL[sample];
             float dryR = inputDataR[sample];
@@ -193,8 +201,14 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 float delayInSamples = params.delayTime / 1000.0f * sampleRate;
                 delayLine.setDelay(delayInSamples);
                 
-                lowCutFilter.setCutoffFrequency(params.lowCut);
-                highCutFilter.setCutoffFrequency(params.highCut);
+                if (params.lowCut != lastLowCut) {
+                    lowCutFilter.setCutoffFrequency(params.lowCut);
+                    lastLowCut = params.lowCut;
+                }
+                if (params.highCut != lastHighCut) {
+                    highCutFilter.setCutoffFrequency(params.highCut);
+                    lastHighCut = params.highCut;
+                }
                 
                 float dry = inputDataL[sample];
                 delayLine.pushSample(0, dry + feedbackL);
