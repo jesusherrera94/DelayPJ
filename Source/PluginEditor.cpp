@@ -20,7 +20,7 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     delayGroup.addAndMakeVisible(delayTimeKnob);
     delayGroup.addAndMakeVisible(delayNoteKnob);
     tempoSyncButton.setButtonText("Sync");
-    tempoSyncButton.setClickingTogglesState(true);
+    tempoSyncButton.setLookAndFeel(ButtonLookAndFeel::get());
     tempoSyncButton.setBounds(0,0,70,27);
     tempoSyncButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::red);
     delayGroup.addAndMakeVisible(tempoSyncButton);
