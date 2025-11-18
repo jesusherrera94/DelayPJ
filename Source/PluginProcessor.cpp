@@ -111,6 +111,7 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     highCutFilter.reset();
     lastLowCut = -1.0f;
     lastHighCut = -1.0f;
+    tempo.reset();
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -139,6 +140,11 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     params.update();
+    tempo.update(getPlayHead());
+    float syncedTime = float(tempo.getMillisecondsForNoteLength(params.delayNote));
+    if (syncedTime > Parameters::maxDelayTime) {
+        syncedTime = Parameters::maxDelayTime;
+    }
     float sampleRate = float(getSampleRate());
     
     auto mainInput = getBusBuffer(buffer, true, 0);
@@ -155,7 +161,8 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     if (isMainOutputStereo) {
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
             params.smoothen();
-            float delayInSamples = (params.delayTime / 1000.0f) * sampleRate;
+            float delayTime = params.tempoSync ? syncedTime : params.delayTime;
+            float delayInSamples = delayTime / 1000.0f * sampleRate;
             delayLine.setDelay(delayInSamples);
             
             if (params.lowCut != lastLowCut) {
@@ -198,7 +205,8 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         } else {
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
                 params.smoothen();
-                float delayInSamples = params.delayTime / 1000.0f * sampleRate;
+                float delayTime = params.tempoSync ? syncedTime : params.delayTime;
+                float delayInSamples = delayTime / 1000.0f * sampleRate;
                 delayLine.setDelay(delayInSamples);
                 
                 if (params.lowCut != lastLowCut) {
