@@ -18,11 +18,11 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     delayGroup.setText("Delay");
     delayGroup.setTextLabelPosition(juce::Justification::horizontallyCentred);
     delayGroup.addAndMakeVisible(delayTimeKnob);
-    delayGroup.addAndMakeVisible(delayNoteKnob);
+    delayGroup.addChildComponent(delayNoteKnob);
     tempoSyncButton.setButtonText("Sync");
-    tempoSyncButton.setLookAndFeel(ButtonLookAndFeel::get());
+    tempoSyncButton.setClickingTogglesState(true);
     tempoSyncButton.setBounds(0,0,70,27);
-    tempoSyncButton.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::red);
+    tempoSyncButton.setLookAndFeel(ButtonLookAndFeel::get());
     delayGroup.addAndMakeVisible(tempoSyncButton);
     addAndMakeVisible(delayGroup);
     
@@ -39,12 +39,15 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     outputGroup.addAndMakeVisible(gainKnob);
     outputGroup.addAndMakeVisible(mixKnob);
     addAndMakeVisible(outputGroup);
-    setLookAndFeel(&mainLF);
     setSize (500, 330);
+    setLookAndFeel(&mainLF);
+    updateDelayKnobs(audioProcessor.params.tempoSyncParam->get());
+    audioProcessor.params.tempoSyncParam->addListener(this);
 }
 
 DelayPJAudioProcessorEditor::~DelayPJAudioProcessorEditor()
 {
+    audioProcessor.params.tempoSyncParam->removeListener(this);
     setLookAndFeel(nullptr);
 }
 
@@ -84,8 +87,26 @@ void DelayPJAudioProcessorEditor::resized()
     // Position the knobs inside the groups
     delayTimeKnob.setTopLeftPosition(20, 20);
     tempoSyncButton.setTopLeftPosition(20, delayTimeKnob.getBottom() + 10);
-    delayNoteKnob.setTopLeftPosition(20, tempoSyncButton.getBottom() - 5);
+    // place the knob in top of delay time knob
+    delayNoteKnob.setTopLeftPosition(delayTimeKnob.getX(), delayTimeKnob.getY());
     mixKnob.setTopLeftPosition(20, 20);
     gainKnob.setTopLeftPosition(mixKnob.getX(), mixKnob.getBottom() + 20);
     
+}
+
+void DelayPJAudioProcessorEditor::parameterValueChanged(int, float value) {
+    // if it is executing on the message thread(UI), update directly
+    if (juce::MessageManager::getInstance()->isThisTheMessageThread()){
+        updateDelayKnobs(value != 0.0f);
+    } else {
+        // if it is called directly from the audio thread, defer the update to the message thread
+        juce::MessageManager::callAsync([this, value]{
+            updateDelayKnobs(value != 0.0f);
+        });
+    }
+}
+
+void DelayPJAudioProcessorEditor::updateDelayKnobs(bool tempoSyncActive) {
+    delayTimeKnob.setVisible(!tempoSyncActive);
+    delayNoteKnob.setVisible(tempoSyncActive);
 }
