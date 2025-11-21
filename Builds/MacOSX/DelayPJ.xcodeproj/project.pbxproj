@@ -69,6 +69,7 @@
 		D516328215E05E91BC637663 /* include_juce_graphics.mm */ = {isa = PBXBuildFile; fileRef = 540C1291D1FA006C1A9D456C; };
 		D55023E6DBCAA0883B68DFAC /* juce_VST3ManifestHelper.mm */ = {isa = PBXBuildFile; fileRef = 2D8A2E57F046D309F467ED91; settings = { COMPILER_FLAGS = "-fobjc-arc -w -DJUCE_SKIP_PRECOMPILED_HEADER"; }; };
 		D711DF7834677034D8095C0D /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = A1FC906E3511B28CDB15E9FD; };
+		DB66E46C5ED389CE8C606E1E /* DelayLine.cpp */ = {isa = PBXBuildFile; fileRef = 1A5082D981D13873D1A2DF49; };
 		E0078BF476C36F6556162DF6 /* RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = DA383EAF109212B5D417F85F; };
 		E7FCDFF144CF7D40B450C5BF /* Tempo.cpp */ = {isa = PBXBuildFile; fileRef = 21E900F869CF8B674F96EC71; };
 		F8BBFC5F2A547727D982B016 /* include_juce_data_structures.mm */ = {isa = PBXBuildFile; fileRef = CE33C1125FAA2115022CF092; };
@@ -89,6 +90,7 @@
 		14260D25B07D73F6842BA2EE /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDelayPJ.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		15EAE88305261A29A05DE507 /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A483C7D366E4734AED10686 /* Cocoa.framework */ /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1A5082D981D13873D1A2DF49 /* DelayLine.cpp */ /* DelayLine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DelayLine.cpp; path = ../../Source/DelayLine.cpp; sourceTree = SOURCE_ROOT; };
 		1AD7E1350ADF3C1E02C3D01F /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = /Users/jesusherrera/development/JUCE/modules/juce_data_structures; sourceTree = "<absolute>"; };
 		1FE753D2833A95C20D01441B /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		21E900F869CF8B674F96EC71 /* Tempo.cpp */ /* Tempo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Tempo.cpp; path = ../../Source/Tempo.cpp; sourceTree = SOURCE_ROOT; };
@@ -97,6 +99,7 @@
 		29719CF8E45DDFB907F1DAA7 /* Parameters.h */ /* Parameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Parameters.h; path = ../../Source/Parameters.h; sourceTree = SOURCE_ROOT; };
 		2D8A2E57F046D309F467ED91 /* juce_VST3ManifestHelper.mm */ /* juce_VST3ManifestHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_VST3ManifestHelper.mm; path = /Users/jesusherrera/development/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm; sourceTree = "<absolute>"; };
 		30D36960E33771E1559EA638 /* RotaryKnob.cpp */ /* RotaryKnob.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RotaryKnob.cpp; path = ../../Source/RotaryKnob.cpp; sourceTree = SOURCE_ROOT; };
+		34F9BCF2508A8B45783B784C /* DelayLine.h */ /* DelayLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DelayLine.h; path = ../../Source/DelayLine.h; sourceTree = SOURCE_ROOT; };
 		362B0FD3E01A9412540EDBA1 /* include_juce_audio_processors_ara.cpp */ /* include_juce_audio_processors_ara.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_ara.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_ara.cpp; sourceTree = SOURCE_ROOT; };
 		39F2101008216B54D484BA5E /* include_juce_graphics_Harfbuzz.cpp */ /* include_juce_graphics_Harfbuzz.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_graphics_Harfbuzz.cpp; path = ../../JuceLibraryCode/include_juce_graphics_Harfbuzz.cpp; sourceTree = SOURCE_ROOT; };
 		3BF4E591C798B7DDE618D49B /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DelayPJ.vst3; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +343,8 @@
 		7564A9777A0826A89A1F3BAC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				1A5082D981D13873D1A2DF49,
+				34F9BCF2508A8B45783B784C,
 				088F8A71C05D01DF14B5C8ED,
 				9C4CCBBC5CD85801DDF52AAA,
 				C9FB2DE6BDA4EF9D12165A6D,
@@ -737,6 +742,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB66E46C5ED389CE8C606E1E,
 				1A5105650ADAEE68D770603E,
 				4BE77F9056DF93B6AB711A0A,
 				C857A307B9E99A04C95081B5,
