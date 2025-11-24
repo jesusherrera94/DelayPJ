@@ -20,7 +20,7 @@ void DelayLine::setMaximunDelayInSamples(int maxLengthInSamples) {
         buffer.reset(new float[size_t(bufferLength)]);
     }
 }
-
+ 
 void DelayLine::reset() noexcept {
     writeIndex = bufferLength - 1;
     for (size_t i = 0; i < size_t(bufferLength); ++i) {

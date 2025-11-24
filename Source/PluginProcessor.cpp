@@ -113,6 +113,8 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     lastLowCut = -1.0f;
     lastHighCut = -1.0f;
     tempo.reset();
+    levelL.store(0.0f);
+    levelR.store(0.0f);
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -160,6 +162,8 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     float* outputDataL = mainOutput.getWritePointer(0);
     float * outputDataR = mainOutput.getWritePointer(isMainOutputStereo ? 1 : 0);
     if (isMainOutputStereo) {
+        float maxL = 0.0f;
+        float maxR = 0.0f;
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
             params.smoothen();
             float delayTime = params.tempoSync ? syncedTime : params.delayTime;
@@ -199,10 +203,19 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             //        float mixL = dryL + wetL * params.mix;
             //        float mixR = dryR + wetR * params.mix;
             
-            outputDataL[sample] = mixL * params.gain;
-            outputDataR[sample] = mixR * params.gain;
+            float outL = mixL * params.gain;
+            float outR = mixR * params.gain;
+            
+            outputDataL[sample] = outL;
+            outputDataR[sample] = outR;
+            
+            maxL = std::max(maxL, std::abs(outL));
+            maxR = std::max(maxR, std::abs(outR));
         }
+        levelL.store(maxL);
+        levelR.store(maxR);
         } else {
+            float maxL = 0.0f;
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
                 params.smoothen();
                 float delayTime = params.tempoSync ? syncedTime : params.delayTime;
@@ -224,8 +237,11 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 feedbackL = lowCutFilter.processSample(0, feedbackL);
                 feedbackL = highCutFilter.processSample(0, feedbackL);
                 float mix = dry + wet * params.mix;
-                outputDataL[sample] = mix * params.gain;
+                float outL = mix * params.gain;
+                outputDataL[sample] = outL;
+                maxL = std::max(maxL, std::abs(outL));
             }
+            levelL.store(maxL);
         }
     // adding protect your ears utility to protect ears and speakers
     #if JUCE_DEBUG

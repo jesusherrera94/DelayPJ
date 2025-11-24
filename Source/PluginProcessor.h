@@ -60,6 +60,7 @@ public:
         *this, nullptr, "Parameters", Parameters::createParameterLayout()
     };
     Parameters params;
+    std::atomic<float> levelL, levelR;
 private:
     DelayLine delayLineL, delayLineR;
     float feedbackL = 0.0f;
