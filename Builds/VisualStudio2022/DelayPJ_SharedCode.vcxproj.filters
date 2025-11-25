@@ -700,6 +700,9 @@
     <ClCompile Include="..\..\Source\DelayLine.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\LevelMeter.cpp">
+      <Filter>DelayPJ\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\LookAndFeel.cpp">
       <Filter>DelayPJ\Source</Filter>
     </ClCompile>
@@ -3694,6 +3697,9 @@
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\DSP.h">
+      <Filter>DelayPJ\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\LevelMeter.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\LookAndFeel.h">

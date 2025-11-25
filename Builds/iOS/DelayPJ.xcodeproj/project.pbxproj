@@ -38,6 +38,7 @@
 		411C0362D14920B5A616BD86 /* UIKit.framework */ = {isa = PBXBuildFile; fileRef = 5EA617E28CD099C56B1A0AA8; };
 		4BE77F9056DF93B6AB711A0A /* Parameters.cpp */ = {isa = PBXBuildFile; fileRef = 900399371F12C2C3935BFD3E; };
 		4FB8E52283414CC5EB5D0547 /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = 5095C743D994EDC439DFAC1E; };
+		520120FE5441513386189F4F /* LevelMeter.cpp */ = {isa = PBXBuildFile; fileRef = 62D65161F152FDFFFC95B6B5; };
 		5860E200DF3D1B16A489BE93 /* include_juce_audio_utils.mm */ = {isa = PBXBuildFile; fileRef = 968FEDD037EC0C65950B9774; };
 		58626ABD485186FBFB7E8632 /* CoreImage.framework */ = {isa = PBXBuildFile; fileRef = 69A2F8D126D2DD3D4B6D206D; };
 		6380D1639187A6D6E5A1C2AC /* include_juce_events.mm */ = {isa = PBXBuildFile; fileRef = ACCA010DBD36C3455A6F05CC; };
@@ -107,6 +108,8 @@
 		5E2276B188DC4250D4761922 /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		5EA617E28CD099C56B1A0AA8 /* UIKit.framework */ /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5EE08121DC30B6CF1C24168B /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
+		6174F8FC7C7CDB5AF5D2E873 /* LevelMeter.h */ /* LevelMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LevelMeter.h; path = ../../Source/LevelMeter.h; sourceTree = SOURCE_ROOT; };
+		62D65161F152FDFFFC95B6B5 /* LevelMeter.cpp */ /* LevelMeter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LevelMeter.cpp; path = ../../Source/LevelMeter.cpp; sourceTree = SOURCE_ROOT; };
 		65C1F9800F3C7D204B31D642 /* PluginEditor.h */ /* PluginEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = SOURCE_ROOT; };
 		69A2F8D126D2DD3D4B6D206D /* CoreImage.framework */ /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6FB3ECB01290D968FEEB687F /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = /Users/jesusherrera/development/JUCE/modules/juce_gui_extra; sourceTree = "<absolute>"; };
@@ -272,6 +275,8 @@
 				1A5082D981D13873D1A2DF49,
 				34F9BCF2508A8B45783B784C,
 				088F8A71C05D01DF14B5C8ED,
+				62D65161F152FDFFFC95B6B5,
+				6174F8FC7C7CDB5AF5D2E873,
 				9C4CCBBC5CD85801DDF52AAA,
 				C9FB2DE6BDA4EF9D12165A6D,
 				900399371F12C2C3935BFD3E,
@@ -482,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB66E46C5ED389CE8C606E1E,
+				520120FE5441513386189F4F,
 				1A5105650ADAEE68D770603E,
 				4BE77F9056DF93B6AB711A0A,
 				C857A307B9E99A04C95081B5,

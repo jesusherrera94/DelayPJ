@@ -13,6 +13,7 @@
 #include "Parameters.h"
 #include "RotaryKnob.h"
 #include "LookAndFeel.h"
+#include "LevelMeter.h"
 
 //==============================================================================
 /**
@@ -48,5 +49,6 @@ private:
     juce::AudioProcessorValueTreeState::ButtonAttachment tempoSyncAttachment {
         audioProcessor.apvts, tempoSyncParamID.getParamID(), tempoSyncButton
     };
+    LevelMeter meter;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayPJAudioProcessorEditor)
 };

@@ -11,7 +11,7 @@
 
 //==============================================================================
 DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p), meter(p.levelL, p.levelR)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -37,6 +37,7 @@ DelayPJAudioProcessorEditor::DelayPJAudioProcessorEditor (DelayPJAudioProcessor&
     outputGroup.setText("Output");
     outputGroup.setTextLabelPosition(juce::Justification::horizontallyCentred);
     outputGroup.addAndMakeVisible(gainKnob);
+    outputGroup.addAndMakeVisible(meter);
     outputGroup.addAndMakeVisible(mixKnob);
     addAndMakeVisible(outputGroup);
     setSize (500, 330);
@@ -91,6 +92,7 @@ void DelayPJAudioProcessorEditor::resized()
     delayNoteKnob.setTopLeftPosition(delayTimeKnob.getX(), delayTimeKnob.getY());
     mixKnob.setTopLeftPosition(20, 20);
     gainKnob.setTopLeftPosition(mixKnob.getX(), mixKnob.getBottom() + 20);
+    meter.setBounds(outputGroup.getWidth() - 45, 30, 30, gainKnob.getBottom() - 30);
     
 }
 
