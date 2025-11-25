@@ -37,5 +37,10 @@ private:
     int positionForLevel(float dbLevel) const noexcept {
         return int(std::round(juce::jmap(dbLevel, maxdB, mindB, maxPos, minPos)));
     }
+    static constexpr float clampdB = -120.0f;
+    static constexpr float clampLevel = 0.000001f;
+    float dbLevelL;
+    float dbLevelR;
+    void drawLevel(juce::Graphics& g, float level, int x, int width);
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LevelMeter)
 };
