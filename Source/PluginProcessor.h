@@ -12,7 +12,7 @@
 #include "Parameters.h"
 #include "Tempo.h"
 #include "DelayLine.h"
-
+#include "Measurement.h"
 
 //==============================================================================
 /**
@@ -60,7 +60,7 @@ public:
         *this, nullptr, "Parameters", Parameters::createParameterLayout()
     };
     Parameters params;
-    std::atomic<float> levelL, levelR;
+    Measurement levelL, levelR;
 private:
     DelayLine delayLineL, delayLineR;
     float feedbackL = 0.0f;

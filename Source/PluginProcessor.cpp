@@ -113,8 +113,8 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     lastLowCut = -1.0f;
     lastHighCut = -1.0f;
     tempo.reset();
-    levelL.store(0.0f);
-    levelR.store(0.0f);
+    levelL.reset();
+    levelR.reset();
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -212,8 +212,8 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             maxL = std::max(maxL, std::abs(outL));
             maxR = std::max(maxR, std::abs(outR));
         }
-        levelL.store(maxL);
-        levelR.store(maxR);
+        levelL.updateIfGreater(maxL);
+        levelR.updateIfGreater(maxR);
         } else {
             float maxL = 0.0f;
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
@@ -241,7 +241,7 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 outputDataL[sample] = outL;
                 maxL = std::max(maxL, std::abs(outL));
             }
-            levelL.store(maxL);
+            levelL.updateIfGreater(maxL);
         }
     // adding protect your ears utility to protect ears and speakers
     #if JUCE_DEBUG

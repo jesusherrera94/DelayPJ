@@ -140,6 +140,7 @@
 		9C429AAEC73446D57C3742E5 /* VST3 Manifest Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = juce_vst3_helper; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4CCBBC5CD85801DDF52AAA /* LookAndFeel.cpp */ /* LookAndFeel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LookAndFeel.cpp; path = ../../Source/LookAndFeel.cpp; sourceTree = SOURCE_ROOT; };
 		9F692B0950D42EE8CD480135 /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
+		A1AC089A886BBB0F31188D91 /* Measurement.h */ /* Measurement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Measurement.h; path = ../../Source/Measurement.h; sourceTree = SOURCE_ROOT; };
 		A1FC906E3511B28CDB15E9FD /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		A29D0CC91E01BEC795AB6751 /* Security.framework */ /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A700EFAD8CD854F0B4F43E90 /* include_juce_audio_plugin_client_AU_1.mm */ /* include_juce_audio_plugin_client_AU_1.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_1.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_1.mm; sourceTree = SOURCE_ROOT; };
@@ -353,6 +354,7 @@
 				6174F8FC7C7CDB5AF5D2E873,
 				9C4CCBBC5CD85801DDF52AAA,
 				C9FB2DE6BDA4EF9D12165A6D,
+				A1AC089A886BBB0F31188D91,
 				900399371F12C2C3935BFD3E,
 				29719CF8E45DDFB907F1DAA7,
 				9126EADE00C1C36FD237B4D3,

@@ -3705,6 +3705,9 @@
     <ClInclude Include="..\..\Source\LookAndFeel.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Measurement.h">
+      <Filter>DelayPJ\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Parameters.h">
       <Filter>DelayPJ\Source</Filter>
     </ClInclude>
