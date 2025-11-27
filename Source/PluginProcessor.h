@@ -70,10 +70,18 @@ private:
     float lastLowCut = -1.0f;
     float lastHighCut = -1.0f;
     Tempo tempo;
+    // variables from crossfading
+//    float delayInSamples = 0.0f;
+//    float targetDelay = 0.0f;
+//    float xfade = 0.0f;
+//    float xfadeInc = 0.0f;
     float delayInSamples = 0.0f;
     float targetDelay = 0.0f;
-    float xfade = 0.0f;
-    float xfadeInc = 0.0f;
+    float fade = 0.0f;
+    float fadeTarget = 0.0f;
+    float coeff = 0.0f; // one-pole smoothing(filter)
+    float wait = 0.0f;
+    float waitInc = 0.0f;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayPJAudioProcessor)
 };
