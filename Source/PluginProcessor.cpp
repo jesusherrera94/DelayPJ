@@ -119,6 +119,18 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 //    targetDelay = 0.0f;
 //    xfade = 0.0f;
 //    xfadeInc = static_cast<float>( 1.0f /(0.05 * sampleRate)); // 50 ms
+    
+    delayInSamples = 0.0f;
+    targetDelay = 0.0f;
+    
+    fade = 1.0f;
+    fadeTarget = 1.0f;
+    
+    coeff = 1.0f - std::exp(-1.0f / (0.05f * float(sampleRate)));
+    
+    wait = 0.0f;
+    waitInc = 1.0f / (0.3f * float(sampleRate)); // 300 ms
+    
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -171,7 +183,17 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
             params.smoothen();
             float delayTime = params.tempoSync ? syncedTime : params.delayTime;
-            float delayInSamples = delayTime / 1000.0f * sampleRate;
+            float newTargetDelay = delayTime / 1000.0f * sampleRate;
+            if (newTargetDelay != targetDelay) {
+                targetDelay = newTargetDelay;
+                if(delayInSamples == 0.0f) {
+                    delayInSamples = targetDelay;
+                }
+                else {
+                    wait = waitInc;
+                    fadeTarget = 0.0f;
+                }
+            }
 //            if (xfade == 0.0f) {
 //                float delayTime = params.tempoSync ? syncedTime : params.delayTime;
 //                targetDelay = delayTime / 1000.0f * sampleRate;
@@ -202,6 +224,20 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             
             float wetL = delayLineL.read(delayInSamples);
             float wetR = delayLineR.read(delayInSamples);
+            
+            fade += (fadeTarget - fade) * coeff;
+            
+            wetL *= fade;
+            wetR *= fade;
+            
+            if(wait > 0.0f) {
+                wait += waitInc;
+                if(wait >= 1.0f) {
+                    delayInSamples = targetDelay;
+                    wait = 0.0f;
+                    fadeTarget = 1.0f; //fade in
+                }
+            }
             
 //            if (xfade > 0.0f) {
 //                float newL = delayLineL.read(targetDelay);
@@ -246,7 +282,17 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
                 params.smoothen();
                 float delayTime = params.tempoSync ? syncedTime : params.delayTime;
-                float delayInSamples = delayTime / 1000.0f * sampleRate;
+                float newTargetDelay = delayTime / 1000.0f * sampleRate;
+                if (newTargetDelay != targetDelay) {
+                    targetDelay = newTargetDelay;
+                    if(delayInSamples == 0.0f) {
+                        delayInSamples = targetDelay;
+                    }
+                    else {
+                        wait = waitInc;
+                        fadeTarget = 0.0f;
+                    }
+                }
 //                if (xfade == 0.0f) {
 //                    float delayTime = params.tempoSync ? syncedTime : params.delayTime;
 //                    targetDelay = delayTime / 1000.0f * sampleRate;
@@ -269,6 +315,18 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 float dry = inputDataL[sample];
                 delayLineL.write(dry + feedbackL);
                 float wet = delayLineL.read(delayInSamples);
+                
+                fade += (fadeTarget - fade) * coeff;
+                wet *= fade;
+                
+                if(wait > 0.0f) {
+                    wait += waitInc;
+                    if(wait >= 1.0f) {
+                        delayInSamples = targetDelay;
+                        wait = 0.0f;
+                        fadeTarget = 1.0f; //fade in
+                    }
+                }
                 
 //                if (xfade > 0.0f) {
 //                    float newL = delayLineL.read(targetDelay);

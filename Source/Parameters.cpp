@@ -205,8 +205,8 @@ void Parameters::reset() noexcept {
 void Parameters::smoothen() noexcept {
     gain = gainSmoother.getNextValue();
     // one-pole filter formula
-    delayTime += (targetDelayTime - delayTime) * coeff;
-    // delayTime = targetDelayTime;
+    // delayTime += (targetDelayTime - delayTime) * coeff;
+    delayTime = targetDelayTime;
     mix = mixSmoother.getNextValue();
     feedback = feedbackSmoother.getNextValue();
     panningEqualPower(stereoSmoother.getNextValue(), panL, panR);
