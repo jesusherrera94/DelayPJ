@@ -115,6 +115,10 @@ void DelayPJAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
     tempo.reset();
     levelL.reset();
     levelR.reset();
+    delayInSamples = 0.0f;
+    targetDelay = 0.0f;
+    xfade = 0.0f;
+    xfadeInc = static_cast<float>( 1.0f /(0.05 * sampleRate)); // 50 ms
 }
 
 void DelayPJAudioProcessor::releaseResources()
@@ -166,8 +170,15 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
         float maxR = 0.0f;
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
             params.smoothen();
-            float delayTime = params.tempoSync ? syncedTime : params.delayTime;
-            float delayInSamples = delayTime / 1000.0f * sampleRate;
+            if (xfade == 0.0f) {
+                float delayTime = params.tempoSync ? syncedTime : params.delayTime;
+                targetDelay = delayTime / 1000.0f * sampleRate;
+                if (delayInSamples == 0.0f) {
+                    delayInSamples = targetDelay;
+                } else if (targetDelay != delayInSamples) {
+                    xfade = xfadeInc;
+                }
+            }
             
             if (params.lowCut != lastLowCut) {
                 lowCutFilter.setCutoffFrequency(params.lowCut);
@@ -189,6 +200,20 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             
             float wetL = delayLineL.read(delayInSamples);
             float wetR = delayLineR.read(delayInSamples);
+            
+            if (xfade > 0.0f) {
+                float newL = delayLineL.read(targetDelay);
+                float newR = delayLineR.read(targetDelay);
+                wetL = (1.0f - xfade) * wetL + xfade * newL;
+                wetR = (1.0f - xfade) * wetR + xfade * newR;
+                
+                xfade += xfadeInc;
+                if (xfade >= 1.0f) {
+                    delayInSamples = targetDelay;
+                    xfade = 0.0f;
+                }
+            }
+            
             feedbackL = wetL * params.feedback;
             feedbackL = lowCutFilter.processSample(0, feedbackL);
             feedbackL = highCutFilter.processSample(0, feedbackL);
@@ -218,8 +243,15 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             float maxL = 0.0f;
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample) {
                 params.smoothen();
-                float delayTime = params.tempoSync ? syncedTime : params.delayTime;
-                float delayInSamples = delayTime / 1000.0f * sampleRate;
+                if (xfade == 0.0f) {
+                    float delayTime = params.tempoSync ? syncedTime : params.delayTime;
+                    targetDelay = delayTime / 1000.0f * sampleRate;
+                    if (delayInSamples == 0.0f) {
+                        delayInSamples = targetDelay;
+                    } else if (targetDelay != delayInSamples) {
+                        xfade = xfadeInc;
+                    }
+                }
                 
                 if (params.lowCut != lastLowCut) {
                     lowCutFilter.setCutoffFrequency(params.lowCut);
@@ -233,6 +265,17 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 float dry = inputDataL[sample];
                 delayLineL.write(dry + feedbackL);
                 float wet = delayLineL.read(delayInSamples);
+                
+                if (xfade > 0.0f) {
+                    float newL = delayLineL.read(targetDelay);
+                    wet = (1.0f - xfade) * wet + xfade * newL;
+                    xfade += xfadeInc;
+                    if(xfade >= 1.0f) {
+                        delayInSamples = targetDelay;
+                        xfade = 0.0f;
+                    }
+                }
+                
                 feedbackL = wet * params.feedback;
                 feedbackL = lowCutFilter.processSample(0, feedbackL);
                 feedbackL = highCutFilter.processSample(0, feedbackL);

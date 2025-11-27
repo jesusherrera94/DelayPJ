@@ -71,7 +71,7 @@ private:
     float lastHighCut = -1.0f;
     Tempo tempo;
     float delayInSamples = 0.0f;
-    float targetDelat = 0.0f;
+    float targetDelay = 0.0f;
     float xfade = 0.0f;
     float xfadeInc = 0.0f;
     //==============================================================================
