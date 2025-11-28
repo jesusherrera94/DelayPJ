@@ -61,6 +61,7 @@ public:
     };
     Parameters params;
     Measurement levelL, levelR;
+    juce::AudioProcessorParameter* getBypassParameter() const override;
 private:
     DelayLine delayLineL, delayLineR;
     float feedbackL = 0.0f;

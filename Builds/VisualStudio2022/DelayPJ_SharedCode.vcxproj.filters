@@ -7778,6 +7778,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Assets\Bypass.png">
+      <Filter>DelayPJ\Assets</Filter>
+    </None>
     <None Include="..\..\Assets\Lato-Medium.ttf">
       <Filter>DelayPJ\Assets</Filter>
     </None>

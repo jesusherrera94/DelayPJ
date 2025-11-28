@@ -159,6 +159,7 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     params.update();
+    if (params.bypassed) { return; }
     tempo.update(getPlayHead());
     float syncedTime = float(tempo.getMillisecondsForNoteLength(params.delayNote));
     if (syncedTime > Parameters::maxDelayTime) {
@@ -269,6 +270,11 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
             float outL = mixL * params.gain;
             float outR = mixR * params.gain;
             
+            if (params.bypassed) {
+                outL = dryL;
+                outR = dryR;
+            }
+            
             outputDataL[sample] = outL;
             outputDataR[sample] = outR;
             
@@ -343,6 +349,9 @@ void DelayPJAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, [[ma
                 feedbackL = highCutFilter.processSample(0, feedbackL);
                 float mix = dry + wet * params.mix;
                 float outL = mix * params.gain;
+                if (params.bypassed) {
+                    outL = dry;
+                }
                 outputDataL[sample] = outL;
                 maxL = std::max(maxL, std::abs(outL));
             }
@@ -386,3 +395,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new DelayPJAudioProcessor();
 }
 
+juce::AudioProcessorParameter* DelayPJAudioProcessor::getBypassParameter() const
+{
+    return params.bypassParam;
+}
