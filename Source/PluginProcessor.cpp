@@ -76,16 +76,16 @@ int DelayPJAudioProcessor::getCurrentProgram()
     return 0;
 }
 
-void DelayPJAudioProcessor::setCurrentProgram (int index)
+void DelayPJAudioProcessor::setCurrentProgram (int)
 {
 }
 
-const juce::String DelayPJAudioProcessor::getProgramName (int index)
+const juce::String DelayPJAudioProcessor::getProgramName (int)
 {
     return {};
 }
 
-void DelayPJAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void DelayPJAudioProcessor::changeProgramName (int, const juce::String&)
 {
 }
 
